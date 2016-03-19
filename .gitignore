@@ -3,7 +3,8 @@ public
 .tmp
 .sass-cache
 .idea
-client/bower_components
+client/dist
 dist
 /server/config/local.env.js
 .env
+TODO.md

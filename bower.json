@@ -1,0 +1,21 @@
+{
+  "name": "smart-money",
+  "description": "",
+  "main": "server/app.js",
+  "authors": [
+    "Michael Liang <michaelpliang@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/spyderinvestments/smart-money",
+  "moduleType": [
+    "es6"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/dist/bower_components",
+    "test",
+    "tests"
+  ]
+}

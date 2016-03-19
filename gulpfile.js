@@ -11,12 +11,12 @@ var babel = require('gulp-babel');
 
 var dirs = {
   src: {
-    js: "client/app/**/*.js",
-    scss: "client/app/app.scss",
-    html: "client/app/**/*.html",
-    lib: "client/assets/**/*"
+    js: "./client/src/**/*.js",
+    scss: "./client/src/app.scss",
+    html: "./client/src/**/*.html",
+    lib: "./client/assets/**/*"
   },
-  out: {
+  dist: {
     html: 'dist/',
     css: 'dist/',
     lib: 'dist/'
