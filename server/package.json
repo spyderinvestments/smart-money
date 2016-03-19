@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "5.2.0"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Liang <michaelpliang@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.0.0-rc.1",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.14.2",
+    "compression": "^1.6.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "jwt-simple": "^0.4.1",
+    "kerberos": "0.0.18",
+    "lodash": "^4.5.0",
+    "mailgun-js": "^0.7.7",
+    "moment": "^2.11.2",
+    "mongoose": "^4.4.2",
+    "morgan": "^1.6.1",
+    "request": "^2.69.0"
+  }
+}
