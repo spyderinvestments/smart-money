@@ -18,100 +18,75 @@ const mongoose = require('mongoose'),
 let User;
 
 let userSchema = mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true,
-    select: false
-  },
-  email: {
-    type: String,
-    select: false
-  },
-  likes: {
-    type: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Resource'
-    }],
-    default: [],
-    select: true
-  },
-  strikes: {
-    type: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Resource'
-    }],
-    default: [],
-    select: true
-  },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  friends: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  bills : [{type: mongoose.Schema.ObjectId, ref: 'Bill'}]
 });
 
-userSchema.statics.likeResource = function (resourceId, userId, cb) {
-  let updateUser = new Promise((resolve, reject) => {
-    User.findByIdAndUpdate(userId, {
-      $addToSet: {
-        "likes": resourceId
-      }
-    }, {
-      new: true
-    }, (err, newUser) => {
-      if (err) return reject(err);
-      resolve();
-    })
-  })
-  let updateResource = new Promise((resolve, reject) => {
-    Resource.findByIdAndUpdate(resourceId, {
-      $inc: {
-        "likes": 1,
-        "total": 1
-      }
-    }, (err) => {
-      if (err) return reject(err);
-      resolve();
-    })
-  })
 
-  Promise.all([updateUser, updateResource]).then((value) => {
-    cb(null, "success")
-  }, (err) => {
-    console.log("error liking resource", resourceId, userId, err);
-    cb(err)
-  })
-}
+// userSchema.statics.likeResource = function (resourceId, userId, cb) {
+//   let updateUser = new Promise((resolve, reject) => {
+//     User.findByIdAndUpdate(userId, {
+//       $addToSet: {
+//         "likes": resourceId
+//       }
+//     }, {
+//       new: true
+//     }, (err, newUser) => {
+//       if (err) return reject(err);
+//       resolve();
+//     })
+//   })
+//   let updateResource = new Promise((resolve, reject) => {
+//     Resource.findByIdAndUpdate(resourceId, {
+//       $inc: {
+//         "likes": 1,
+//         "total": 1
+//       }
+//     }, (err) => {
+//       if (err) return reject(err);
+//       resolve();
+//     })
+//   })
+//
+//   Promise.all([updateUser, updateResource]).then((value) => {
+//     cb(null, "success")
+//   }, (err) => {
+//     console.log("error liking resource", resourceId, userId, err);
+//     cb(err)
+//   })
+// }
 
-userSchema.statics.strikeResource = function (resourceId, userId, cb) {
-  let updateUser = new Promise((resolve, reject) => {
-    User.findByIdAndUpdate(userId, {
-      $addToSet: {
-        "strikes": resourceId
-      }
-    }, (err) => {
-      if (err) return reject(err);
-      resolve();
-    })
-  })
-  let updateResource = new Promise((resolve, reject) => {
-    Resource.findByIdAndUpdate(resourceId, {
-      $inc: {
-        "total": 1
-      }
-    }, (err) => {
-      if (err) return reject(err);
-      resolve();
-    })
-  })
-
-  Promise.all([updateUser, updateResource]).then((value) => {
-    cb(null, "success")
-  }, (err) => {
-    console.log("error striking resource", resourceId, userId, err);
-    cb(err)
-  })
-}
+// userSchema.statics.strikeResource = function (resourceId, userId, cb) {
+//   let updateUser = new Promise((resolve, reject) => {
+//     User.findByIdAndUpdate(userId, {
+//       $addToSet: {
+//         "strikes": resourceId
+//       }
+//     }, (err) => {
+//       if (err) return reject(err);
+//       resolve();
+//     })
+//   })
+//   let updateResource = new Promise((resolve, reject) => {
+//     Resource.findByIdAndUpdate(resourceId, {
+//       $inc: {
+//         "total": 1
+//       }
+//     }, (err) => {
+//       if (err) return reject(err);
+//       resolve();
+//     })
+//   })
+//
+//   Promise.all([updateUser, updateResource]).then((value) => {
+//     cb(null, "success")
+//   }, (err) => {
+//     console.log("error striking resource", resourceId, userId, err);
+//     cb(err)
+//   })
+// }
 
 userSchema.methods.token = function () {
   let payload = {
